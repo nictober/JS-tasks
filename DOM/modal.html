@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            background-color: #666;
+            color: aquamarine;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            width: 100px;
+            padding: 15px;
+            border-radius: 4px;
+            box-shadow: none;
+            text-shadow: none;
+        }
+
+        .container {
+            margin: 0 auto;
+            height: 100vh;
+            display: flex;
+            flex-direction: column  ;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .text {
+            max-width: 70%;
+        }
+
+        .modal {
+            display: flex;
+            background: rgba(247, 228, 62, 0.31);
+            z-index: 10000;
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+        }
+
+        .modal-container {
+            margin: 0 auto;
+            height: 100vh;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .content {
+            padding: 10px;
+            width: 600px;
+            background-color: darkslateblue;
+            border: 1px solid black;
+        }
+
+        .close-button {
+            display: inline-block;
+            text-align: center;
+            width: 20px;
+            height: 20px;
+            color: #fff;
+            background: red;
+            border-radius: 50%;
+            text-decoration: none;
+            
+        }
+
+    </style>
+    <body>
+        <div class="container">
+            <p class="text">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
+                recusandae ducimus harum similique, architecto voluptatum cum
+                mollitia nemo esse expedita porro perferendis neque labore rem
+                molestias vero. Iste, sunt accusantium!
+            </p>
+            <button class="modal-button" id="openOverlay">Открыть</button>
+        </div>
+        <!-- <div class="modal">
+            <div class="container">
+                <div class="content">
+                    Hello World!
+                </div>
+            </div>
+        </div> -->
+        <script>
+            const openButton = document.querySelector("#openOverlay");
+            const body = document.body;
+
+
+            openButton.addEventListener ("click", function (e) {
+
+                const modalBackground = document.createElement("div");
+                modalBackground.classList.add("modal");
+
+                const modContainer = document.createElement("div");
+                modContainer.classList.add("modal-container");
+
+                const content = document.createElement("div");
+                content.classList.add("content");
+
+                // content.textContent = "Hello <b>World</b>!"
+                content.innerHTML = "Hello <b>World</b>!";
+
+                const closeButton = document.createElement("a");
+                closeButton.classList.add("close-button");
+                closeButton.textContent = "x";
+                closeButton.href = "#";
+
+
+                body.appendChild(modalBackground);
+                modalBackground.appendChild(modContainer);
+                modContainer.appendChild(content);
+                modContainer.appendChild(closeButton);
+
+                closeButton.addEventListener("click", (e) => {
+                    e.preventDefault();
+
+                    body.removeChild(modalBackground);
+                })
+
+                modalBackground.addEventListener("click", e => {
+                    // console.log(e.target);
+                    if (!e.target.classList.contains("content")){
+                        closeButton.click();
+                    }
+                })
+            })
+
+        </script>
+    </body>
+</html>
